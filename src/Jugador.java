@@ -17,5 +17,9 @@ public class Jugador {
     public void setId(String id) {
         this.id = id;
     }
-
+    /*
+    public Oceano getOceano(){
+        return oceano;
+    }
+    */
 }
