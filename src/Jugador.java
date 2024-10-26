@@ -1,11 +1,19 @@
+import java.util.ArrayList;
+
 public class Jugador {
     private String nombre;
     private String id;
+    private Barcos barcos;
     // private Oceano oceano;
 
     public Jugador(String nombre, String id) {
         this.nombre = nombre;
+        this.id = id;
+        this.barcos = new Barcos();
+        this.barcos.generarBarcos();
     }
+
+
 
     public String getNombre() {
         return nombre;
