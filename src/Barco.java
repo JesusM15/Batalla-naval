@@ -1,12 +1,12 @@
 public class Barco {
-    private int width;
+    private int width = 1;
     private int height;
     private int xPosition;
     private int yPosition;
     private boolean esVertical;
     private String id;
-    public Barco(int width, int height, int xPosition, int yPosition, boolean esVertical) {
-        this.width = width;
+    private boolean Derribado = false;
+    public Barco(int height, int xPosition, int yPosition, boolean esVertical) {
         this.height = height;
         this.xPosition = xPosition;
         this.yPosition = yPosition;
@@ -27,6 +27,30 @@ public class Barco {
     public String getId() {return id;}
     public void setId(String id) {this.id = id;}
     public void voltear() {
+        int w = this.height;
+        this.height = this.width;
+        this.width = w;
         this.esVertical = !this.esVertical;
     }
+    public void disparar(int x, int y){
+        if((x>=0 && x<10)&&(y>=0 && y<10)){
+            System.out.println("Disparando "+x+" "+y);
+        }
+    }
+    public int[] posicionFinal(){
+        int x=0,y=0;
+        int[] coor = new int[2];
+        if(esVertical){
+            y = this.height+yPosition;
+            x = xPosition;
+        }else{
+            x = this.width+xPosition;
+            y = yPosition;
+        }
+        coor[0] = x;
+        coor[1] = y;
+        return coor;
+    }
+    public boolean isDerribado() {return Derribado;}
+    public void setDerribado(boolean derribado) {this.Derribado = derribado;}
 }
