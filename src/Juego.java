@@ -55,11 +55,11 @@ public class Juego {
 
         for (int i = 0; i < filas; i++) {
             for (int j = 0; j < columnas; j++) {
-                if(jugador.getOceano().getOceano()[i][j].equals("-1")){
+                if(jugador.getOceano().getOceano()[i][j].equals("X")){
                     counterJugador++;
                 }
 
-                if (bot.getOceano().getOceano()[i][j].equals("-1")) {
+                if (bot.getOceano().getOceano()[i][j].equals("X")) {
                     counterBot++;
                 }
             }
