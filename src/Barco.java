@@ -83,4 +83,24 @@ public class Barco {
     }
     public boolean isDerribado() {return Derribado;}
     public void setDerribado(boolean derribado) {this.Derribado = derribado;}
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+
+        if(this.esVertical){
+            for(int i = 0; i < this.height; i++){
+                for(int j = 0; j < this.width; j++){
+                    sb.append(id).append(" ");
+                }
+            }
+        }else{
+            for(int i = 0; i < this.width; i++){
+                for(int j = 0; j < this.height; j++){
+                    sb.append(id).append("\n");
+                }
+            }
+        }
+        return sb.toString();
+    }
 }

@@ -9,6 +9,10 @@ public class Oceano {
         iniciarMatriz();
     }
 
+    public String[][] getOceano() {
+        return oceano;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder().append("   ");
@@ -54,7 +58,7 @@ public class Oceano {
 
     private boolean verificarColocacion(Barco barco, int row, int col) {
         int[] lastCoords = barco.obtenerCoordFinal();
-        if(lastCoords[0]>=MAX || lastCoords[1] >= MAX) return false;
+        if(lastCoords[0]> MAX || lastCoords[1] > MAX) return false;
 
         // recorre en direccion dependiendo si esta vertical u horizontal y ve si es que no hay nada colocado en ninguna de las posiciones
         // que ocupa el barco.
