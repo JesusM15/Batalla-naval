@@ -7,8 +7,7 @@ public class Juego {
     private Jugador jugador;
     private Bot bot;
     private boolean consoleMode;
-    private boolean playerTurn;
-
+    private boolean playerTurn = false;
     public Juego(boolean consoleMode){
         this.jugador = new Jugador("", 1);
         this.bot = new Bot();
@@ -25,13 +24,26 @@ public class Juego {
     }
 
     public void jugarEnConsola(){
-
+        Oceano tableroBot = new Oceano();
+        tableroBot.iniciarMatriz();
         pedirConfigurarBarcos();
         mostrarOceanos();
-
+        obtenerTurno();
         do{
             // desarrollar el juego pidiendo disparos en un metodo y lanzandolos revisar si impacta.
-
+            System.out.println("iniciando fase de batalla...");
+            if(playerTurn){
+                System.out.println("turno jugador");
+                System.out.println(jugador.getOceano());
+                System.out.println(tableroBot);
+                jugador.disparar(bot.getOceano(),tableroBot);
+                System.out.println(jugador.getOceano());
+                System.out.println(tableroBot);
+            }else {
+                System.out.println("turno bot");
+                bot.disparar(jugador.getOceano());
+            }
+            obtenerTurno();
         }while(!gameOver());
     }
 
@@ -78,5 +90,7 @@ public class Juego {
         String nombre = sc.nextLine();
         jugador.setNombre(nombre);
     }
-
+    public void obtenerTurno(){
+        this.playerTurn = !this.playerTurn;
+    }
 }

@@ -15,6 +15,33 @@ public class Jugador {
         this.barcos.generarBarcos();
         this.oceano = new Oceano();
     }
+    public void disparar(Oceano oc,Oceano muestra){
+        int x = 0,y=0;
+        String[][] s = new String[10][10];
+        String[][] muestras = new String[10][10];
+        s = oc.getOceano();
+        muestras = muestra.getOceano();
+        Scanner sc = new Scanner(System.in);
+        do{
+            System.out.print("Escriba la coordenada x(1-10): ");
+            x = sc.nextInt() - 1;
+            System.out.print("Escriba la coordenada y(A-J/a-j): ");
+            char c = sc.next().charAt(0);
+
+            if(c > 64 && c < 91){
+                y = c - 65;
+            }
+            if(c > 96 && c < 123){
+                y = c - 97;
+            }
+        }while(x > 9 || x < 0 || y > 9 || y < 0);
+        if(s[x][y].equals("b1")||s[x][y].equals("b2")||s[x][y].equals("b3")||s[x][y].equals("b4")||s[x][y].equals("b5")){
+            muestras[x][y] = "X";
+        }else{
+            System.out.println("fallaste el tiro");
+            muestras[x][y] = "1";
+        }
+    }
     public void acomodarBarcosAleatorio(){
         Random rand = new Random();
         int x, y, voltear;
