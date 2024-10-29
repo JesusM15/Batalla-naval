@@ -19,6 +19,7 @@ public class Barco {
         this.xCord = 0;
         this.colocado = false;
         this.esVertical = true;
+        this.Derribado = false;
     }
 
     public int getWidth() {
