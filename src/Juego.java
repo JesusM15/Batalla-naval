@@ -38,6 +38,19 @@ public class Juego {
             pedirConfigurarBarcos();
             obtenerTurno();
         }
+        if(juegoCargado && gameOver()){
+            mostrarOceanos();
+            System.out.println("El juego Cargado a concluido");
+            juegoCargado = false;
+            tablero.reiniciarTableros();
+            jugador.getOceano().reiniciarOceano();
+            bot.getOceano().reiniciarOceano();
+            jugador.borrarBarcos();
+            bot.borrarBarcos();
+            jugador.crearBarcos();
+            bot.crearBarcos();
+            return;
+        }
         mostrarOceanos();
         boolean acerto = false;
         System.out.println("iniciando fase de batalla...\n");
@@ -48,14 +61,13 @@ public class Juego {
                 System.out.println("TU TURNO\n");
                 mostrarOceanos();
                 acerto = jugador.disparar(bot);
-//                mostrarOceanos();
+//              mostrarOceanos();
             }else {
                 System.out.println("TURNO DEL BOT");
                 bot.disparar(jugador);
             }
             guardarJuego(filename);
             obtenerTurno();
-
         }while(!gameOver());
         guardarJuego(filename);
 

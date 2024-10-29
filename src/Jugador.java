@@ -15,7 +15,12 @@ public class Jugador {
         this.barcos.generarBarcos();
         this.oceano = new Oceano();
     }
-
+    public void borrarBarcos() {
+        barcos.borrarBarcos();
+    }
+    public void crearBarcos() {
+        this.barcos.generarBarcos();
+    }
     public boolean disparar(Jugador enemigo){
         int x = 0,y=0;
 //        System.out.println("Barco bot: ");

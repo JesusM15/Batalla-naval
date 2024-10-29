@@ -19,8 +19,15 @@ public class Main {
             String filename;
             switch (opc) {
                 case 1:
-                    System.out.print("Ingrese el nombre del archivo con el que se guardara la partida: ");
-                    filename = sc.nextLine();
+                    File archivo;
+                    do {
+                        System.out.print("Ingrese el nombre del archivo con el que se guardara la partida: ");
+                        filename = sc.nextLine();
+                        archivo = new File(filename);
+                        if (archivo.exists()) {
+                            System.out.println("El archivo ya existe");
+                        }
+                    }while(archivo.exists());
                     game.jugar(filename);
                     break;
                 case 2:

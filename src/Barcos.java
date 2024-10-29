@@ -7,11 +7,12 @@ public class Barcos {
         this.barcos = new ArrayList<>();
         generarBarcos();
     }
-
     public ArrayList<Barco> getBarcos() {
         return barcos;
     }
-
+    public void borrarBarcos() {
+        barcos.clear();
+    }
     public void generarBarcos() {
         if(!barcos.isEmpty()) return;
         int n = 5;

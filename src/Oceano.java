@@ -12,7 +12,16 @@ public class Oceano {
     public String[][] getOceano() {
         return oceano;
     }
-
+    public void reiniciarOceano() {
+        for(int i = 0; i < MAX; i++) {
+            for(int j = 0; j < MAX; j++) {
+                oceano[i][j] = "0";
+            }
+        }
+    }
+    public void modificarOceanoCoor(int x,int y){
+        oceano[x][y] = "0";
+    }
     public String showPrivateOcean(){
         StringBuilder sb = new StringBuilder().append("   ");
         char[] letters = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'};
