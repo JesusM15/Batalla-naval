@@ -7,42 +7,57 @@ public class Bot extends Jugador{
         super("", 2);
     }
 
-    public void acomodarBarcosAleatorio(){
+    public void acomodarBarcosAleatorio() {
         Random rand = new Random();
         int x, y, voltear;
-        Barco barco;
-        while(!barcos.getBarcos().isEmpty()){
-            barco = barcos.getBarcos().getFirst();
 
-            voltear = rand.nextInt(2);
-            if(voltear == 0){
-                barco.voltear();
-            }
-            x = rand.nextInt(10); // 0 - 15
-            y = rand.nextInt(10);
+        for (Barco barco : barcos.getBarcos()) {
+            do {
+                voltear = rand.nextInt(2);
+                if (voltear == 0) {
+                    barco.voltear();
+                }
 
-            barco.setXCord(x);
-            barco.setYCord(y);
+                x = rand.nextInt(10);
+                y = rand.nextInt(10);
 
-            if(oceano.colocarBarco(barco, x, y)){
-                barcos.getBarcos().removeFirst();
-            };
+                barco.setXCord(x);
+                barco.setYCord(y);
+
+            } while (!oceano.colocarBarco(barco, x, y));
         }
     }
-    public void disparar(Oceano oc) {
+
+    public boolean disparar(Jugador enemigo) {
         int x = 0,y=0;
         Random rand = new Random();
         String[][] r = new String[10][10];
+        Oceano oc = enemigo.getOceano();
         r = oc.getOceano();
         do{
             x = rand.nextInt(10);
             y = rand.nextInt(10);
         }while(r[x][y].equals("1") || r[x][y].equals("X"));
-        if(r[x][y].equals("b1")||r[x][y].equals("b2")||r[x][y].equals("b3")||r[x][y].equals("b4")||r[x][y].equals("b5")){
-            r[x][y] = "X";
-        }else{
-            System.out.println("el bot fallo el tiro");
-            r[x][y] = "1";
+        String target = r[x][y];
+
+        if(oc.manejarDisparo(x, y)){
+            System.out.println("El bot acerto a un barco.");
+
+            if(!oc.buscarRemanentesDelBarco(target)){
+                for(Barco barcoDerribado : enemigo.getBarcos().barcos){
+                    if(barcoDerribado.getId().equals(target)){
+                        System.out.println("dentro bot");
+
+                        barcoDerribado.setDerribado(true);
+                        oc.derribarBarco(barcoDerribado);
+                    }
+                }
+            }
+
+            return true;
         }
+
+        System.out.println("El bot fallo el disparo.");
+        return false;
     }
 }
