@@ -12,7 +12,7 @@ public class Bot extends Jugador{
         int x, y, voltear;
 
         for (Barco barco : barcos.getBarcos()) {
-            do {
+             do {
                 voltear = rand.nextInt(2);
                 if (voltear == 0) {
                     barco.voltear();
@@ -37,7 +37,7 @@ public class Bot extends Jugador{
         do{
             x = rand.nextInt(10);
             y = rand.nextInt(10);
-        }while(r[x][y].equals("1") || r[x][y].equals("X"));
+        }while(r[x][y].equals("1") || r[x][y].equals("X") || r[x][y].equals(" "));
         String target = r[x][y];
 
         if(oc.manejarDisparo(x, y)){
@@ -46,8 +46,6 @@ public class Bot extends Jugador{
             if(!oc.buscarRemanentesDelBarco(target)){
                 for(Barco barcoDerribado : enemigo.getBarcos().barcos){
                     if(barcoDerribado.getId().equals(target)){
-                        System.out.println("dentro bot");
-
                         barcoDerribado.setDerribado(true);
                         oc.derribarBarco(barcoDerribado);
                     }

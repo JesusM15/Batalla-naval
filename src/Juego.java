@@ -28,9 +28,27 @@ public class Juego {
             crearJugador();
         }
         if(this.consoleMode){
+            if(juegoCargado && gameOver()){
+                mostrarOceanos();
+                System.out.println("El juego Cargado a concluido");
+                reiniciarJuego();
+                return;
+            }
+
             jugarEnConsola(filename);
+            reiniciarJuego();
         }
 
+    }
+
+    public void reiniciarJuego(){
+        jugador.getOceano().iniciarMatriz();
+        bot.getOceano().iniciarMatriz();
+        juegoCargado = false;
+        jugador.borrarBarcos();
+        bot.borrarBarcos();
+        jugador.crearBarcos();
+        bot.crearBarcos();
     }
 
     public void jugarEnConsola(String filename){
@@ -38,19 +56,7 @@ public class Juego {
             pedirConfigurarBarcos();
             obtenerTurno();
         }
-        if(juegoCargado && gameOver()){
-            mostrarOceanos();
-            System.out.println("El juego Cargado a concluido");
-            juegoCargado = false;
-            tablero.reiniciarTableros();
-            jugador.getOceano().reiniciarOceano();
-            bot.getOceano().reiniciarOceano();
-            jugador.borrarBarcos();
-            bot.borrarBarcos();
-            jugador.crearBarcos();
-            bot.crearBarcos();
-            return;
-        }
+
         mostrarOceanos();
         boolean acerto = false;
         System.out.println("iniciando fase de batalla...\n");
@@ -76,15 +82,13 @@ public class Juego {
 
     public boolean gameOver(){
         boolean jugadorDerribado = jugador.getBarcos().getBarcos().stream().filter(Barco::isDerribado
-        ).count() > 4;
+        ).count() == 5;
 
         boolean botDerribado = bot.getBarcos().getBarcos().stream().filter(Barco::isDerribado
-        ).count() > 4;
+        ).count() == 5;
+
         System.out.println(bot.getBarcos().getBarcos().size());
 
-        System.out.println("derribados:");
-        System.out.println(jugadorDerribado);
-        System.out.println(botDerribado);
         if (jugadorDerribado) {
             winner = "BOT";
         } else if (botDerribado) {
@@ -95,8 +99,8 @@ public class Juego {
     }
 
     public void pedirConfigurarBarcos(){
-//        jugador.acomodarBarcos(); // ESTE SERA EL VALIDO
-        jugador.acomodarBarcosAleatorio();
+        jugador.acomodarBarcos(); // ESTE SERA EL VALIDO
+//        jugador.acomodarBarcosAleatorio();
 
         this.playerTurn = false;
         bot.acomodarBarcosAleatorio();
@@ -185,6 +189,8 @@ public class Juego {
             boolean esBarcoJugador = false;
             boolean esBarcoBot = false;
             int fila = 0;
+            jugador.getBarcos().generarBarcos();
+            bot.getBarcos().generarBarcos();
 
             while ((linea = reader.readLine()) != null) {
                 if (linea.startsWith("NombreJugador:")) {
@@ -235,18 +241,27 @@ public class Juego {
                     int height = Integer.parseInt(datosBarco[6]);
 
                     // Crear y asignar barco al jugador o al bot según corresponda
-                    Barco barco = new Barco(id, height);  // Inicia el barco con su altura
-                    barco.setWidth(width);
-                    barco.setXCord(xCord);
-                    barco.setYCord(yCord);
-                    barco.setEsVertical(esVertical);
-                    barco.setDerribado(derribado);
 
-                    if (esBarcoJugador) {
-                        jugador.getBarcos().getBarcos().add(barco);
-                    } else if (esBarcoBot) {
-                        bot.getBarcos().getBarcos().add(barco);
+                    if(esBarcoJugador){
+                        for(Barco barco: jugador.getBarcos().getBarcos()){
+                            if(barco.getId().equals(id)){
+                                barco.setEsVertical(esVertical);
+                                barco.setXCord(xCord);
+                                barco.setYCord(yCord);
+                                barco.setDerribado(derribado);
+                            }
+                        }
+                    }else if(esBarcoBot){
+                        for(Barco barco: bot.getBarcos().getBarcos()){
+                            if(barco.getId().equals(id)){
+                                barco.setEsVertical(esVertical);
+                                barco.setXCord(xCord);
+                                barco.setYCord(yCord);
+                                barco.setDerribado(derribado);
+                            }
+                        }
                     }
+
                 }
             }
 
