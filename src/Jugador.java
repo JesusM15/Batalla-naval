@@ -41,6 +41,12 @@ public class Jugador {
             }
         }while(x > 9 || x < 0 || y > 9 || y < 0);
         String target = oceano.getOceano()[x][y];
+
+        if(target.equals("X") || target.equals(" ") || target.equals("1")){
+            System.out.println("Este sitio ya ha sido disparado...\n");
+            return false;
+        }
+
         if(!oceano.manejarDisparo(x, y)){
             System.out.println("Fallas te el tiro...\n");
             return false;
@@ -49,7 +55,6 @@ public class Jugador {
         if(!oceano.buscarRemanentesDelBarco(target)){
             for(Barco barcoDerribado : enemigo.getBarcos().barcos){
                 if(barcoDerribado.getId().equals(target)){
-                    System.out.println("dentro");
                     barcoDerribado.setDerribado(true);
                     oceano.derribarBarco(barcoDerribado);
                 }

@@ -18,7 +18,7 @@
     }
      @Override
      public String toString() {
-         StringBuilder builder = new StringBuilder().append(tablero[1]);// tablero bot
+         StringBuilder builder = new StringBuilder().append(tablero[1].showPrivateOcean());// tablero bot
          for(int i = 0; i<tablero[0].getOceano().length; i++){
              builder.append("---");
          }

@@ -1,0 +1,36 @@
+NombreJugador:jesus
+Turno:Bot
+Jugador
+X,b4,b4,b4,1,0,0,1,0,0
+1,0,0,0,1,0,0,1,1,1
+0,0,b5,b5,b5,X,b5,0,0,0
+0,0,1,0,1,b2,b2,b2,0,1
+0,0,0,b1,b1,0,0,0,1,0
+0,0,0,b3,0,0,0,0,0,0
+0,0,0,b3,0,0,0,0,0,0
+0,0,0,b3,0,0,0,0,0,0
+0,0,0,0,0,1,0,1,0,0
+0,0,0,0,1,0,1,0,0,0
+Bot
+0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0
+ ,0,0,0,0,0,0,0,0,0
+ ,0, , ,0,0,0,0,0,0
+ ,0,0,0,0, ,0,0, ,0
+ ,0,0,0,0, ,0,0,1,0
+0,0,0,0,0, ,0,0, ,0
+0,0,0,0,0,0,0,0, ,0
+0,0,0,0, , , ,0, ,0
+BarcosJugador
+b1,4,3,Vertical,NoDerribado,1,2
+b2,3,5,Vertical,NoDerribado,1,3
+b3,5,3,Horizontal,NoDerribado,3,1
+b4,0,0,Vertical,NoDerribado,1,4
+b5,2,2,Vertical,NoDerribado,1,5
+BarcosBot
+b1,4,2,Vertical,Derribado,1,2
+b2,5,5,Horizontal,Derribado,3,1
+b3,9,4,Vertical,Derribado,1,3
+b4,3,0,Horizontal,Derribado,4,1
+b5,5,8,Horizontal,Derribado,5,1
