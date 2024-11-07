@@ -12,6 +12,7 @@ public class Juego {
     private String winner;
     private Tablero tablero;
     private boolean juegoCargado = false;
+    private VentanaGrafica ventanaGrafica;
 
     public Juego(boolean consoleMode){
         this.jugador = new Jugador("", 1);
@@ -21,6 +22,9 @@ public class Juego {
         this.winner = null;
         this.tablero = new Tablero(jugador.getOceano(), bot.getOceano());
         this.juegoCargado = false;
+
+        ventanaGrafica = new VentanaGrafica(jugador.getOceano(), bot.getOceano());
+        ventanaGrafica.setVisible(true);
     }
 
     public void jugar(String filename){
@@ -99,8 +103,8 @@ public class Juego {
     }
 
     public void pedirConfigurarBarcos(){
-        jugador.acomodarBarcos(); // ESTE SERA EL VALIDO
-//        jugador.acomodarBarcosAleatorio();
+ //       jugador.acomodarBarcos(); // ESTE SERA EL VALIDO
+       jugador.acomodarBarcosAleatorio();
 
         this.playerTurn = false;
         bot.acomodarBarcosAleatorio();
@@ -111,6 +115,7 @@ public class Juego {
         //System.out.print(bot.getOceano().showPrivateOcean()); // el que se va mostrar
 
         System.out.println(tablero);
+        ventanaGrafica.actualizarTablero();
 
         //System.out.println(bot.getOceano());
        // System.out.println(jugador.getNombre());
